@@ -25,6 +25,7 @@
   "homepage": "https://github.com/ilidio-vatuva/airalo-ui-test-automation#readme",
   "devDependencies": {
     "@playwright/test": "1.50",
+    "allure-playwright": "^2.15.1",
     "typescript": "^5.9.3"
   }
 }

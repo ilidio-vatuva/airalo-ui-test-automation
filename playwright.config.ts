@@ -5,8 +5,8 @@ export default defineConfig({
   timeout: 30_000,
   expect: { timeout: 10_000 },
   fullyParallel: false,
-  retries: 0,
-  reporter: [["html", { open: "never" }]],
+  retries: 1,
+  reporter: [["html", { open: "never" }], ["allure-playwright"]],
   use: {
     baseURL: "https://www.airalo.com",
     headless: true,
