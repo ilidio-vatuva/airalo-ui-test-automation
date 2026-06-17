@@ -59,35 +59,24 @@ test.describe("Airalo eSIM Package - Japan", () => {
   });
 
   test.describe("3. Select Unlimited eSIM Package", () => {
-    test("3.1 - Should display data plan tabs", async ({
-      homePage,
-      countryPage,
-    }) => {
-      await homePage.navigate();
-      await homePage.searchForCountry(COUNTRY);
-      await homePage.selectCountryResult(COUNTRY);
+    test("3.1 - Should display data plan tabs", async ({ countryPage }) => {
+      await countryPage.navigateDirect();
 
       expect(await countryPage.areDataTabsVisible()).toBe(true);
     });
 
     test("3.2 - Should have unlimited tab active by default", async ({
-      homePage,
       countryPage,
     }) => {
-      await homePage.navigate();
-      await homePage.searchForCountry(COUNTRY);
-      await homePage.selectCountryResult(COUNTRY);
+      await countryPage.navigateDirect();
 
       expect(await countryPage.isUnlimitedTabActive()).toBe(true);
     });
 
     test("3.3 - Should display 7-day unlimited package", async ({
-      homePage,
       countryPage,
     }) => {
-      await homePage.navigate();
-      await homePage.searchForCountry(COUNTRY);
-      await homePage.selectCountryResult(COUNTRY);
+      await countryPage.navigateDirect();
 
       const packageButton =
         await countryPage.getPackageButtonByDuration(PACKAGE_DURATION);
@@ -95,13 +84,10 @@ test.describe("Airalo eSIM Package - Japan", () => {
     });
 
     test("3.4 - Should open package detail on selection", async ({
-      homePage,
       countryPage,
       packageDetailPage,
     }) => {
-      await homePage.navigate();
-      await homePage.searchForCountry(COUNTRY);
-      await homePage.selectCountryResult(COUNTRY);
+      await countryPage.navigateDirect();
       await countryPage.selectPackage(PACKAGE_DURATION);
 
       expect(await packageDetailPage.isBuyNowButtonVisible()).toBe(true);
@@ -110,12 +96,9 @@ test.describe("Airalo eSIM Package - Japan", () => {
 
   test.describe("4. Verify Package Price", () => {
     test("4.1 - Should display price on the package card", async ({
-      homePage,
       countryPage,
     }) => {
-      await homePage.navigate();
-      await homePage.searchForCountry(COUNTRY);
-      await homePage.selectCountryResult(COUNTRY);
+      await countryPage.navigateDirect();
 
       const cardPrice =
         await countryPage.getPackageCardPrice(PACKAGE_DURATION);
@@ -123,13 +106,10 @@ test.describe("Airalo eSIM Package - Japan", () => {
     });
 
     test("4.2 - Should display price next to Buy now button", async ({
-      homePage,
       countryPage,
       packageDetailPage,
     }) => {
-      await homePage.navigate();
-      await homePage.searchForCountry(COUNTRY);
-      await homePage.selectCountryResult(COUNTRY);
+      await countryPage.navigateDirect();
       await countryPage.selectPackage(PACKAGE_DURATION);
 
       const buyNowPrice = await packageDetailPage.getBuyNowPrice();
@@ -137,13 +117,10 @@ test.describe("Airalo eSIM Package - Japan", () => {
     });
 
     test("4.3 - Package card price should match Buy now price", async ({
-      homePage,
       countryPage,
       packageDetailPage,
     }) => {
-      await homePage.navigate();
-      await homePage.searchForCountry(COUNTRY);
-      await homePage.selectCountryResult(COUNTRY);
+      await countryPage.navigateDirect();
 
       const cardPrice =
         await countryPage.getPackageCardPrice(PACKAGE_DURATION);

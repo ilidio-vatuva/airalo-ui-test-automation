@@ -1,5 +1,7 @@
 import { type Page, type Locator } from "@playwright/test";
 import { Selectors } from "../constants/selectors";
+import { TestConfig } from "../config/test.config";
+import { TestData } from "../constants/test-data";
 
 export class CountryPage {
   private readonly page: Page;
@@ -16,6 +18,27 @@ export class CountryPage {
     this.unlimitedTab = page.getByTestId(Selectors.country.unlimitedTab);
     this.durationTitles = page.getByTestId(Selectors.country.durationTitle);
     this.packageButtons = page.getByTestId(Selectors.country.packageButton);
+  }
+
+  async navigateDirect() {
+    await this.page.goto(`/${TestData.countryUrlSlug}`, {
+      waitUntil: "domcontentloaded",
+    });
+    await this.dismissCookieBanner();
+  }
+
+  private async dismissCookieBanner() {
+    const acceptButton = this.page.locator(Selectors.home.cookieBanner);
+    try {
+      await acceptButton.waitFor({
+        state: "visible",
+        timeout: TestConfig.timeouts.overlay,
+      });
+      await acceptButton.click();
+      await acceptButton.waitFor({ state: "hidden", timeout: 3000 });
+    } catch {
+      // Cookie banner not present
+    }
   }
 
   async waitForPackagesLoaded() {

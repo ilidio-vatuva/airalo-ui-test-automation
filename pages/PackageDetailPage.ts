@@ -20,6 +20,11 @@ export class PackageDetailPage {
   }
 
   async isBuyNowButtonVisible(): Promise<boolean> {
-    return this.buyNowButton.isVisible();
+    try {
+      await this.buyNowButton.waitFor({ state: "visible", timeout: 10_000 });
+      return true;
+    } catch {
+      return false;
+    }
   }
 }

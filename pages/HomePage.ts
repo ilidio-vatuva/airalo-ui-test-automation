@@ -17,13 +17,21 @@ export class HomePage {
   }
 
   async navigate() {
-    await this.page.goto("/");
+    await this.page.goto("/", { waitUntil: "domcontentloaded" });
     await this.dismissCookieBanner();
     await this.dismissOverlays();
   }
 
   async isSearchFieldVisible(): Promise<boolean> {
-    return this.searchInput.isVisible();
+    try {
+      await this.searchInput.waitFor({
+        state: "visible",
+        timeout: TestConfig.timeouts.element,
+      });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   async searchForCountry(country: string) {

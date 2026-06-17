@@ -3,7 +3,7 @@ export const TestConfig = {
   timeouts: {
     navigation: 30_000,
     element: 10_000,
-    overlay: 5_000,
+    overlay: 3_000,
     typing: 80,
   },
 } as const;

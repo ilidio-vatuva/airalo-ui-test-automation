@@ -24,6 +24,9 @@ jobs:
 
       - name: Run tests
         run: npx playwright test
+        timeout-minutes: 15
+        env:
+          CI: "true"
 
       - name: Upload Allure results
         if: always()
